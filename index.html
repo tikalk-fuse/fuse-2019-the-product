@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="./css/index.css" type="text/css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body onload="onLoad_startGame()" >
+  <br>
+  <p>Use mouse click or any key to stay in the air</p>
+  <p>How long can you stay alive?</p>
+  <canvas id="screen"
+    onkeydown="onMouse_accelerate(-0.2)"
+    onkeyup=="onMouse_accelerate(0.05)"
+    onmousedown="onMouse_accelerate(-0.2)"
+    onmouseup="onMouse_accelerate(0.05)"
+  ></canvas>
+  <hr>
+  <button onclick="onLoad_startGame()"> restart </button>
+  <script src="./js/game.js"></script>
+</body>
+</html>
