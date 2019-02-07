@@ -1,16 +1,14 @@
 const game = {
     canvas : document.getElementById("screen"),
-    obstacles: [],
-    level: 150,
-    next: 0,
     start() {
+        this.canvas.width = 480;
+        this.canvas.height = 270;
         this.me = new component(30, 30, "red", 10, 120);
         this.me.gravity = 0.05;
         this.score = new component("30px", "Consolas", "black", 280, 40, "text");
-
-        this.canvas.width = 480;
-        this.canvas.height = 270;
         this.context = this.canvas.getContext("2d");
+        this.level = 150;
+        this.next = 0;
         this.frameNo = 0;
         this.obstacles = [];
         clearInterval(game.interval);
