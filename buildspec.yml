@@ -1,0 +1,29 @@
+version: 0.2
+
+env:
+  variables:
+    SOME_PARAM: "I'm here..."
+
+phases:
+  pre_build:
+    commands:
+      - echo "Listing the repo"
+      - ls -la
+      - export PYTHONWARNINGS=ignore
+      - export FOLDER_NAME=$(echo ${CODEBUILD_WEBHOOK_TRIGGER} |cut -d '/' -f 2)
+      - env
+  build:
+    commands:
+      - echo "Listing it again...."
+      - aws --version
+      - echo "Folder name - '${FOLDER_NAME}'"
+      - |
+        aws s3 sync . s3://${SITE_NAME}/${FOLDER_NAME} \
+          --exclude "buildspec.yml" \
+          --delete \
+          --quiet
+  post_build:
+    commands:
+      - echo ====== Post-Build started at `date` ======
+      - echo "Folder name - '${FOLDER_NAME}'"
+      - aws s3 ls s3://${SITE_NAME}/${FOLDER_NAME}/
